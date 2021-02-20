@@ -87,8 +87,10 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
         sectionConstraints: section.constraints
       )
       let lastCellSize = listController.size(of: section.cellModels.last!, with: sizeConstraints)
-      XCTAssertEqual(lastCellSize, expectLastCellSize)
-      XCTAssertEqual(size, expectSectionSize)
+      XCTAssertEqual(floor(lastCellSize.width), floor(expectLastCellSize.width))
+      XCTAssertEqual(floor(lastCellSize.height), floor(expectLastCellSize.height))
+      XCTAssertEqual(floor(size.width), floor(expectSectionSize.width))
+      XCTAssertEqual(floor(size.height), floor(expectSectionSize.height))
     }
 
     // collection view is width 200.
