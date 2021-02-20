@@ -4,10 +4,10 @@ PODS:
     - IGListDiffKit (= 4.1.0)
   - IQKeyboardManagerSwift (6.5.6)
   - MBProgressHUD (1.2.0)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.1)
-  - SwiftLint (0.41.0)
+  - RxRelay (6.1.0):
+    - RxSwift (= 6.1.0)
+  - RxSwift (6.1.0)
+  - SwiftLint (0.42.0)
 
 DEPENDENCIES:
   - IGListDiffKit (from `https://github.com/Instagram/IGListKit`)
@@ -34,10 +34,10 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   IGListDiffKit:
-    :commit: 2c519b0b10511205a143b4e25766eee33d2d4224
+    :commit: 601de1b444f1f9a8255d658b18208f142ee0c864
     :git: https://github.com/Instagram/IGListKit
   IGListKit:
-    :commit: 2c519b0b10511205a143b4e25766eee33d2d4224
+    :commit: 601de1b444f1f9a8255d658b18208f142ee0c864
     :git: https://github.com/Instagram/IGListKit
 
 SPEC CHECKSUMS:
@@ -45,9 +45,9 @@ SPEC CHECKSUMS:
   IGListKit: a2345833762c4ebdf576ed6a51e35db701f0c2f0
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
+  RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
+  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
 PODFILE CHECKSUM: 65d080d2a00fd51c1fea2d072e7495e11a3db60e
 
