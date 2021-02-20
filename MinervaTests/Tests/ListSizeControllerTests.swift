@@ -95,35 +95,35 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
     runTest(
       totalCells: 1,
       minimumWidth: 100,
-      expectLastCellSize: CGSize(width: 150, height: 46),
+      expectLastCellSize: CGSize(width: 150, height: 36.5),
       expectSectionSize: CGSize(width: 200, height: 100)
     )
     // add another cell. last cell shrinks in width.
     runTest(
       totalCells: 2,
       minimumWidth: 100,
-      expectLastCellSize: CGSize(width: 100, height: 46),
+      expectLastCellSize: CGSize(width: 100, height: 36.5),
       expectSectionSize: CGSize(width: 200, height: 100)
     )
     // last cell is pushed onto new row, so it is full width (200)
     runTest(
       totalCells: 3,
       minimumWidth: 100,
-      expectLastCellSize: CGSize(width: 200, height: 46),
-      expectSectionSize: CGSize(width: 200, height: 146)
+      expectLastCellSize: CGSize(width: 200, height: 36.5),
+      expectSectionSize: CGSize(width: 200, height: 136.5)
     )
     // add another cell, everything should still fit
     runTest(
       totalCells: 4,
       minimumWidth: 100,
-      expectLastCellSize: CGSize(width: 200, height: 46),
-      expectSectionSize: CGSize(width: 200, height: 146)
+      expectLastCellSize: CGSize(width: 200, height: 36.5),
+      expectSectionSize: CGSize(width: 200, height: 136.5)
     )
     // force another row
     runTest(
       totalCells: 5,
       minimumWidth: 100,
-      expectLastCellSize: CGSize(width: 150, height: 46),
+      expectLastCellSize: CGSize(width: 150, height: 36.5),
       expectSectionSize: CGSize(width: 200, height: 200)
     )
   }
@@ -152,7 +152,7 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
     let sizeManager = FakeSizeManagerForMarginCells()
     listController.sizeDelegate = sizeManager
 
-    let cellModels: [ListCellModel] = FakeCellModel.createCellModels(count: 1) + [MarginCellModel()]
+    let cellModels: [ListCellModel] = FakeCellModel.createCellModels(count: 1) + [createMarginCell()]
     let section = ListSection(cellModels: cellModels, identifier: "Section")
 
     let updateExpectation = expectation(description: "Update Expectation")
@@ -170,8 +170,8 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
     let sizeManager = FakeSizeManagerForMarginCells()
     listController.sizeDelegate = sizeManager
 
-    let marginCellAbove = MarginCellModel()
-    let marginCellBelow = MarginCellModel()
+    let marginCellAbove = createMarginCell()
+    let marginCellBelow = createMarginCell()
 
     let cellModels: [ListCellModel] =
       [marginCellAbove] + FakeCellModel.createCellModels(count: 1) + [marginCellBelow]
@@ -200,11 +200,11 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
     listController.sizeDelegate = sizeManager
 
     let section0models: [ListCellModel] =
-      FakeCellModel.createCellModels(count: 2, idPrefix: "section0") + [MarginCellModel()]
+      FakeCellModel.createCellModels(count: 2, idPrefix: "section0") + [createMarginCell()]
     let section0 = ListSection(cellModels: section0models, identifier: "section0")
 
     let section1models: [ListCellModel] =
-      FakeCellModel.createCellModels(count: 2, idPrefix: "section1") + [MarginCellModel()]
+      FakeCellModel.createCellModels(count: 2, idPrefix: "section1") + [createMarginCell()]
     let section1 = ListSection(cellModels: section1models, identifier: "section1")
 
     let updateExpectation = expectation(description: "Update Expectation")
@@ -227,11 +227,11 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
     listController.sizeDelegate = sizeManager
 
     let section0models: [ListCellModel] =
-      FakeCellModel.createCellModels(count: 10, idPrefix: "section0") + [MarginCellModel()]
+      FakeCellModel.createCellModels(count: 10, idPrefix: "section0") + [createMarginCell()]
     let section0 = ListSection(cellModels: section0models, identifier: "section0")
 
     let section1models: [ListCellModel] =
-      FakeCellModel.createCellModels(count: 10, idPrefix: "section1") + [MarginCellModel()]
+      FakeCellModel.createCellModels(count: 10, idPrefix: "section1") + [createMarginCell()]
     let section1 = ListSection(cellModels: section1models, identifier: "section1")
 
     let updateExpectation = expectation(description: "Update Expectation")
@@ -264,7 +264,7 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
 
     // section 1 with a margin cell
     let section1models: [ListCellModel] =
-      FakeCellModel.createCellModels(count: 1) + [MarginCellModel()]
+      FakeCellModel.createCellModels(count: 1) + [createMarginCell()]
     let section1 = ListSection(cellModels: section1models, identifier: "section-1")
 
     let updateExpectation = expectation(description: "Update Expectation")
@@ -279,9 +279,7 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
     verifySizeOfCell(at: marginCellIndexPath, matches: marginCellSize)
   }
 
-  public func
-    testSectionSizing_marginCellsAtMinimum_whenDistributionIs_proportionallyWithLastCellFillingWidth()
-  {
+  public func testSectionSizing_marginCellsAtMinimum_whenDistributionIs_proportionallyWithLastCellFillingWidth() {
     // Same as previous test, except with enough cells that the MarginCell shrinks to it's minimum height.
     let sizeManager = FakeSizeManagerForMarginCells()
     listController.sizeDelegate = sizeManager
@@ -293,7 +291,7 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
 
     // section 1 with a margin cell
     let section1models: [ListCellModel] =
-      FakeCellModel.createCellModels(count: 5) + [MarginCellModel()]
+      FakeCellModel.createCellModels(count: 5) + [createMarginCell()]
     let section1 = ListSection(cellModels: section1models, identifier: "section-1")
 
     let updateExpectation = expectation(description: "Update Expectation")
@@ -318,11 +316,16 @@ public final class ListSizeControllerTests: CommonSetupTestCase {
       width: 50,
       height: 50
     )
-    let lastCell = ExpandingTextInputCellModel(
+    var lastCell = FakeCellModel(
       identifier: "LastCellThatFillsWidth",
-      placeholder: "input"
+      size: .relative
     )
+    lastCell.placeholderText = "Placeholder"
     cells.append(lastCell)
     return cells
+  }
+
+  private func createMarginCell() -> FakeCellModel {
+    FakeCellModel(identifier: "MARGIN" + UUID().uuidString, size: .relative)
   }
 }

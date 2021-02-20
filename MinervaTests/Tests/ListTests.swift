@@ -13,7 +13,7 @@ public final class ListTests: CommonSetupTestCase {
   public func testDynamicSizing() {
     let sizeManager = FakeSizeManager()
     listController.sizeDelegate = sizeManager
-    let marginCellModel = MarginCellModel()
+    let marginCellModel = FakeCellModel(identifier: "Fake", size: .relative)
     let section = ListSection(cellModels: [marginCellModel], identifier: "Section")
 
     let updateExpectation = expectation(description: "Update Expectation")

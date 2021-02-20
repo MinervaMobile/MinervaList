@@ -6,7 +6,6 @@
 
 import Foundation
 import Minerva
-import RxSwift
 import XCTest
 
 public class CommonSetupTestCase: XCTestCase {
