@@ -325,7 +325,7 @@ extension ListModelSectionController: ListDisplayDelegate {
 
 extension ListModelSectionController: ListResizableCellDelegate {
   internal func cellDidInvalidateSize(_ cell: ListResizableCell) {
-    guard let index = collectionContext?.index(for: cell, sectionController: self) else { return }
+    guard let index = collectionContext?.index(for: cell, sectionController: self), index != NSNotFound else { return }
     let indexPath = IndexPath(item: index, section: section)
     delegate?.sectionController(self, didInvalidateSizeAt: indexPath)
   }
