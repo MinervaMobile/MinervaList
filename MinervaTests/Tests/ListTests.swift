@@ -283,6 +283,8 @@ public final class ListTests: CommonSetupTestCase {
     }
 
     XCTAssertEqual(cell.bounds.size, size1)
+
+    listController.willDisplay()
     XCTAssertNotNil(cell.resizableDelegate)
 
     cellModel.size = ListCellSize.explicit(size: size2)

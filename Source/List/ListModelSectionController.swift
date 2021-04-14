@@ -133,9 +133,6 @@ extension ListModelSectionController {
       assertionFailure("Failed to load the reuseable cell for \(cellType)")
       return MissingListCell()
     }
-    if let cell = cell as? ListResizableCell {
-      cell.resizableDelegate = self
-    }
     return cell
   }
 
@@ -306,6 +303,9 @@ extension ListModelSectionController: ListDisplayDelegate {
     cell: UICollectionViewCell,
     at index: Int
   ) {
+    if let resizableCell = cell as? ListResizableCell {
+        resizableCell.resizableDelegate = self
+    }
     guard let minervaCell = cell as? ListDisplayableCell else { return }
     minervaCell.willDisplayCell()
   }
@@ -316,6 +316,9 @@ extension ListModelSectionController: ListDisplayDelegate {
     cell: UICollectionViewCell,
     at index: Int
   ) {
+    if let resizableCell = cell as? ListResizableCell {
+        resizableCell.resizableDelegate = nil
+    }
     guard let minervaCell = cell as? ListDisplayableCell else { return }
     minervaCell.didEndDisplayingCell()
   }
