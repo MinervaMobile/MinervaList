@@ -341,6 +341,10 @@ public final class LegacyListController: NSObject, ListController {
       return
     }
     sizeController.clearCache()
+    if let collectionView = collectionView {
+      let context = collectionView.collectionViewLayout.invalidationContext(forBoundsChange: .zero)
+      collectionView.collectionViewLayout.invalidateLayout(with: context)
+    }
     processActionQueue()
   }
 
