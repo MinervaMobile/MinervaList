@@ -241,12 +241,15 @@ public final class LegacyListController: NSObject, ListController {
     }
   }
 
-  private func reloadData(completion: Completion?, enqueueIfNeeded: Bool) {
+  private func reloadData(completion: Completion?, enqueueIfNeeded: Bool, listSections: [ListSection]? = nil) {
     guard !enqueueIfNeeded || (actionQueue.isEmpty && !updating) else {
       actionQueue.append(.reloadData(completion: completion))
       return
     }
     updating = true
+    if let listSections = listSections {
+      listSectionWrappers = listSections.map(ListSectionWrapper.init)
+    }
     adapter.reloadData { [weak self] finished in
       defer {
         completion?(finished)
