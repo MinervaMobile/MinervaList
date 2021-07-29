@@ -70,7 +70,12 @@ public final class LegacyListController: NSObject, ListController {
 
   public func reloadData(completion: Completion?) {
     dispatchPrecondition(condition: .onQueue(.main))
-    reloadData(completion: completion, enqueueIfNeeded: true)
+    reloadData(completion: completion, enqueueIfNeeded: true, listSections: nil)
+  }
+  
+  public func reloadData(listSections: [ListSection], completion: Completion?) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    reloadData(completion: completion, enqueueIfNeeded: true, listSections: listSections)
   }
 
   public func update(with listSections: [ListSection], animated: Bool, completion: Completion?) {
