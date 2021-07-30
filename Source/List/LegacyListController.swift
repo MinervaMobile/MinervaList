@@ -70,7 +70,12 @@ public final class LegacyListController: NSObject, ListController {
 
   public func reloadData(completion: Completion?) {
     dispatchPrecondition(condition: .onQueue(.main))
-    reloadData(completion: completion, enqueueIfNeeded: true)
+    reloadData(completion: completion, enqueueIfNeeded: true, listSections: nil)
+  }
+  
+  public func reloadData(listSections: [ListSection], completion: Completion?) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    reloadData(completion: completion, enqueueIfNeeded: true, listSections: listSections)
   }
 
   public func update(with listSections: [ListSection], animated: Bool, completion: Completion?) {
@@ -241,12 +246,15 @@ public final class LegacyListController: NSObject, ListController {
     }
   }
 
-  private func reloadData(completion: Completion?, enqueueIfNeeded: Bool) {
+  private func reloadData(completion: Completion?, enqueueIfNeeded: Bool, listSections: [ListSection]? = nil) {
     guard !enqueueIfNeeded || (actionQueue.isEmpty && !updating) else {
       actionQueue.append(.reloadData(completion: completion))
       return
     }
     updating = true
+    if let listSections = listSections {
+      listSectionWrappers = listSections.map(ListSectionWrapper.init)
+    }
     adapter.reloadData { [weak self] finished in
       defer {
         completion?(finished)

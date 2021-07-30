@@ -41,6 +41,12 @@ public protocol ListController: AnyObject {
   /// - Parameter completion: A block to execute when the reload completes.
   func reloadData(completion: Completion?)
 
+  /// Replaces the existing list sections with those specified and reloads all cells on the collection view
+  /// - Parameters:
+  ///   - listSections: The sections to bind to the collection view.
+  ///   - completion: A block to execute when the reload completes.
+  func reloadData(listSections: [ListSection], completion: Completion?)
+
   /// Replaces the existing list sections with those specified. If a CellModel has the same identifier it will be updated if identical evaluates to false, otherwise
   /// The newly provided CellModel is ignored.
   /// - Parameters:
