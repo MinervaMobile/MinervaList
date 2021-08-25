@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "MinervaList"
-  s.version = "3.0.0"
+  s.version = "4.0.0"
   s.license = { :type => 'MIT', :file => 'LICENSE' }
 
   s.summary = "A Swift MVVM Framework"
@@ -19,8 +19,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'List' do |ss|
     ss.source_files = 'Source/List/**/*.swift'
-
-    ss.dependency 'IGListKit'
 
     ss.ios.deployment_target = '11.0'
     ss.ios.frameworks = 'Foundation', 'UIKit'

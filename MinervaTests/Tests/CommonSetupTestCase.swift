@@ -15,7 +15,7 @@ public class CommonSetupTestCase: XCTestCase {
   override public func setUp() {
     super.setUp()
     collectionVC = UICollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-    listController = LegacyListController()
+    listController = ModernListController()
     listController.collectionView = collectionVC.collectionView
     listController.viewController = collectionVC
     collectionVC.view.frame = CGRect(x: 0, y: 0, width: 200, height: 500)

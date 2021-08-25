@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,7 @@
 		7B2F7071C99EC43E40224E55 /* Pods_MinervaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7604DF25C8A340E28653D4 /* Pods_MinervaTests.framework */; };
 		DD0DD119249D4143003899B4 /* ListSizeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0DD118249D4143003899B4 /* ListSizeControllerTests.swift */; };
 		DD2C235324ABBD0D008602EE /* CommonSetupTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C235224ABBD0D008602EE /* CommonSetupTestCase.swift */; };
-		DDAB55D924A2B839004BB933 /* LegacyListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB55D824A2B839004BB933 /* LegacyListControllerTests.swift */; };
+		DDAB55D924A2B839004BB933 /* ModernListControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB55D824A2B839004BB933 /* ModernListControllerTests.swift */; };
 		DDAB55E124A6CFD6004BB933 /* RelativeCellSizingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB55E024A6CFD6004BB933 /* RelativeCellSizingHelper.swift */; };
 		F53EAF06237B01A200CB7FFA /* Minerva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5587D4522502BF2004223E5 /* Minerva.framework */; };
 		F5443F9425E1942800011C7B /* FakeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5443F9325E1942800011C7B /* FakeCell.swift */; };
@@ -23,17 +23,19 @@
 		F5587D4C22502BF3004223E5 /* Minerva.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5587D4522502BF2004223E5 /* Minerva.framework */; };
 		F5587D4D22502BF3004223E5 /* Minerva.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5587D4522502BF2004223E5 /* Minerva.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5587D7022502D62004223E5 /* Minerva.h in Headers */ = {isa = PBXBuildFile; fileRef = F5587D5822502C5A004223E5 /* Minerva.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F562CF11234E2A3000402122 /* LegacyListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562CF10234E2A3000402122 /* LegacyListController.swift */; };
-		F5848577233A6673001DBF1E /* ListSectionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5848576233A6673001DBF1E /* ListSectionWrapper.swift */; };
-		F5848579233A669F001DBF1E /* ListCellModelWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5848578233A669F001DBF1E /* ListCellModelWrapper.swift */; };
 		F5DA2B98226D367600BA461A /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B8B226D367500BA461A /* ListController.swift */; };
 		F5DA2B9A226D367600BA461A /* ListViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B8D226D367500BA461A /* ListViewLayout.swift */; };
 		F5DA2B9B226D367600BA461A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B8E226D367500BA461A /* ListCell.swift */; };
 		F5DA2B9C226D367600BA461A /* ListViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B8F226D367500BA461A /* ListViewLayoutAttributes.swift */; };
-		F5DA2B9D226D367600BA461A /* ListModelSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B90226D367500BA461A /* ListModelSectionController.swift */; };
 		F5DA2B9E226D367600BA461A /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B91226D367500BA461A /* ListSection.swift */; };
 		F5DA2BA0226D367600BA461A /* ListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B93226D367500BA461A /* ListCellModel.swift */; };
 		F5DA2BA2226D367600BA461A /* ListSizeConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DA2B95226D367500BA461A /* ListSizeConstraints.swift */; };
+		F5E8A2BC26D4116B0078977A /* ModernListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E8A2BB26D4116B0078977A /* ModernListController.swift */; };
+		F5E8A2BE26D6779C0078977A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E8A2BD26D6779C0078977A /* ViewController.swift */; };
+		F5E8A2CB26D67A450078977A /* MarginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E8A2CA26D67A450078977A /* MarginCell.swift */; };
+		F5E8A2CD26D67A800078977A /* BaseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E8A2CC26D67A800078977A /* BaseListCell.swift */; };
+		F5E8A2CF26D67B120078977A /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E8A2CE26D67B120078977A /* UIView+Extensions.swift */; };
+		F5E8A2D126D67B610078977A /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E8A2D026D67B610078977A /* LabelCell.swift */; };
 		F5EB49E12385A9B00029BAAD /* ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EB49E02385A9B00029BAAD /* ListTests.swift */; };
 		F5EB49E52386A0600029BAAD /* ListCellSizeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EB49E42386A0600029BAAD /* ListCellSizeController.swift */; };
 		F5EF2DB02344FBE300A0073E /* ListExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF2DAF2344FBE300A0073E /* ListExtensions.swift */; };
@@ -90,7 +92,7 @@
 		CB7604DF25C8A340E28653D4 /* Pods_MinervaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinervaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0DD118249D4143003899B4 /* ListSizeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSizeControllerTests.swift; sourceTree = "<group>"; };
 		DD2C235224ABBD0D008602EE /* CommonSetupTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSetupTestCase.swift; sourceTree = "<group>"; };
-		DDAB55D824A2B839004BB933 /* LegacyListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyListControllerTests.swift; sourceTree = "<group>"; };
+		DDAB55D824A2B839004BB933 /* ModernListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernListControllerTests.swift; sourceTree = "<group>"; };
 		DDAB55E024A6CFD6004BB933 /* RelativeCellSizingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativeCellSizingHelper.swift; sourceTree = "<group>"; };
 		F53D0B6A2378F0780051A063 /* MinervaExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinervaExample.entitlements; sourceTree = "<group>"; };
 		F53EAF01237B01A200CB7FFA /* MinervaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinervaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,17 +108,19 @@
 		F5587D4522502BF2004223E5 /* Minerva.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Minerva.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5587D5222502C5A004223E5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5587D5822502C5A004223E5 /* Minerva.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Minerva.h; sourceTree = "<group>"; };
-		F562CF10234E2A3000402122 /* LegacyListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyListController.swift; sourceTree = "<group>"; };
-		F5848576233A6673001DBF1E /* ListSectionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSectionWrapper.swift; sourceTree = "<group>"; };
-		F5848578233A669F001DBF1E /* ListCellModelWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellModelWrapper.swift; sourceTree = "<group>"; };
 		F5DA2B8B226D367500BA461A /* ListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		F5DA2B8D226D367500BA461A /* ListViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewLayout.swift; sourceTree = "<group>"; };
 		F5DA2B8E226D367500BA461A /* ListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		F5DA2B8F226D367500BA461A /* ListViewLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewLayoutAttributes.swift; sourceTree = "<group>"; };
-		F5DA2B90226D367500BA461A /* ListModelSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModelSectionController.swift; sourceTree = "<group>"; };
 		F5DA2B91226D367500BA461A /* ListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
 		F5DA2B93226D367500BA461A /* ListCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCellModel.swift; sourceTree = "<group>"; };
 		F5DA2B95226D367500BA461A /* ListSizeConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListSizeConstraints.swift; sourceTree = "<group>"; };
+		F5E8A2BB26D4116B0078977A /* ModernListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModernListController.swift; sourceTree = "<group>"; };
+		F5E8A2BD26D6779C0078977A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F5E8A2CA26D67A450078977A /* MarginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginCell.swift; sourceTree = "<group>"; };
+		F5E8A2CC26D67A800078977A /* BaseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListCell.swift; sourceTree = "<group>"; };
+		F5E8A2CE26D67B120078977A /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		F5E8A2D026D67B610078977A /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		F5EB49E02385A9B00029BAAD /* ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTests.swift; sourceTree = "<group>"; };
 		F5EB49E42386A0600029BAAD /* ListCellSizeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellSizeController.swift; sourceTree = "<group>"; };
 		F5EF2DAF2344FBE300A0073E /* ListExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtensions.swift; sourceTree = "<group>"; };
@@ -232,6 +236,11 @@
 			isa = PBXGroup;
 			children = (
 				F5587D1222502B10004223E5 /* AppDelegate.swift */,
+				F5E8A2CC26D67A800078977A /* BaseListCell.swift */,
+				F5E8A2D026D67B610078977A /* LabelCell.swift */,
+				F5E8A2CA26D67A450078977A /* MarginCell.swift */,
+				F5E8A2CE26D67B120078977A /* UIView+Extensions.swift */,
+				F5E8A2BD26D6779C0078977A /* ViewController.swift */,
 			);
 			path = Lifecycle;
 			sourceTree = "<group>";
@@ -250,16 +259,13 @@
 		F5DA2B88226D362900BA461A /* List */ = {
 			isa = PBXGroup;
 			children = (
-				F562CF10234E2A3000402122 /* LegacyListController.swift */,
+				F5E8A2BB26D4116B0078977A /* ModernListController.swift */,
 				F5DA2B8E226D367500BA461A /* ListCell.swift */,
 				F5DA2B93226D367500BA461A /* ListCellModel.swift */,
-				F5848578233A669F001DBF1E /* ListCellModelWrapper.swift */,
 				F5EB49E42386A0600029BAAD /* ListCellSizeController.swift */,
 				F5DA2B8B226D367500BA461A /* ListController.swift */,
 				F5EF2DAF2344FBE300A0073E /* ListExtensions.swift */,
-				F5DA2B90226D367500BA461A /* ListModelSectionController.swift */,
 				F5DA2B91226D367500BA461A /* ListSection.swift */,
-				F5848576233A6673001DBF1E /* ListSectionWrapper.swift */,
 				F5DA2B95226D367500BA461A /* ListSizeConstraints.swift */,
 				F5DA2B8D226D367500BA461A /* ListViewLayout.swift */,
 				F5DA2B8F226D367500BA461A /* ListViewLayoutAttributes.swift */,
@@ -272,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				DD2C235224ABBD0D008602EE /* CommonSetupTestCase.swift */,
-				DDAB55D824A2B839004BB933 /* LegacyListControllerTests.swift */,
+				DDAB55D824A2B839004BB933 /* ModernListControllerTests.swift */,
 				DD0DD118249D4143003899B4 /* ListSizeControllerTests.swift */,
 				F5EB49E02385A9B00029BAAD /* ListTests.swift */,
 				F5443F9325E1942800011C7B /* FakeCell.swift */,
@@ -312,7 +318,6 @@
 				F53EAEFD237B01A200CB7FFA /* Sources */,
 				F53EAEFE237B01A200CB7FFA /* Frameworks */,
 				F53EAEFF237B01A200CB7FFA /* Resources */,
-				3B69271CDF829845916CC768 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,12 +335,10 @@
 			buildConfigurationList = F5587D3722502B12004223E5 /* Build configuration list for PBXNativeTarget "MinervaExample" */;
 			buildPhases = (
 				6442496C3C3B783E941CB8D7 /* [CP] Check Pods Manifest.lock */,
-				F53EAEFC237B007100CB7FFA /* Run SwiftLint */,
 				F5587D0B22502B10004223E5 /* Sources */,
 				F5587D0C22502B10004223E5 /* Frameworks */,
 				F5587D0D22502B10004223E5 /* Resources */,
 				F5587D5122502BF3004223E5 /* Embed Frameworks */,
-				39732C6E0732B7CC12665F5B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -436,40 +439,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		39732C6E0732B7CC12665F5B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MinervaExample/Pods-MinervaExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MinervaExample/Pods-MinervaExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MinervaExample/Pods-MinervaExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3B69271CDF829845916CC768 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MinervaTests/Pods-MinervaTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MinervaTests/Pods-MinervaTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MinervaTests/Pods-MinervaTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6442496C3C3B783E941CB8D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -536,24 +505,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F53EAEFC237B007100CB7FFA /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -565,7 +516,7 @@
 				DD2C235324ABBD0D008602EE /* CommonSetupTestCase.swift in Sources */,
 				F5443F9E25E194C500011C7B /* FakeReferenceCellModel.swift in Sources */,
 				F5443F9425E1942800011C7B /* FakeCell.swift in Sources */,
-				DDAB55D924A2B839004BB933 /* LegacyListControllerTests.swift in Sources */,
+				DDAB55D924A2B839004BB933 /* ModernListControllerTests.swift in Sources */,
 				F5443F9825E1943C00011C7B /* FakeSizeManager.swift in Sources */,
 				DD0DD119249D4143003899B4 /* ListSizeControllerTests.swift in Sources */,
 			);
@@ -575,7 +526,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5E8A2BE26D6779C0078977A /* ViewController.swift in Sources */,
 				F5587D1322502B10004223E5 /* AppDelegate.swift in Sources */,
+				F5E8A2CF26D67B120078977A /* UIView+Extensions.swift in Sources */,
+				F5E8A2CB26D67A450078977A /* MarginCell.swift in Sources */,
+				F5E8A2CD26D67A800078977A /* BaseListCell.swift in Sources */,
+				F5E8A2D126D67B610078977A /* LabelCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,15 +539,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F562CF11234E2A3000402122 /* LegacyListController.swift in Sources */,
-				F5DA2B9D226D367600BA461A /* ListModelSectionController.swift in Sources */,
 				F5DA2B9A226D367600BA461A /* ListViewLayout.swift in Sources */,
-				F5848579233A669F001DBF1E /* ListCellModelWrapper.swift in Sources */,
 				F5DA2BA2226D367600BA461A /* ListSizeConstraints.swift in Sources */,
 				F5DA2BA0226D367600BA461A /* ListCellModel.swift in Sources */,
 				F5DA2B9B226D367600BA461A /* ListCell.swift in Sources */,
-				F5848577233A6673001DBF1E /* ListSectionWrapper.swift in Sources */,
 				DDAB55E124A6CFD6004BB933 /* RelativeCellSizingHelper.swift in Sources */,
+				F5E8A2BC26D4116B0078977A /* ModernListController.swift in Sources */,
 				F5EB49E52386A0600029BAAD /* ListCellSizeController.swift in Sources */,
 				F5DA2B9C226D367600BA461A /* ListViewLayoutAttributes.swift in Sources */,
 				F5DA2B98226D367600BA461A /* ListController.swift in Sources */,

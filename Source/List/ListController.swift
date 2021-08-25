@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import IGListKit
 import UIKit
 
 /// Manages the collection view state and updating the collection view to the provided ListSection's.

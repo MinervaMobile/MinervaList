@@ -5,15 +5,13 @@
 //
 
 import Foundation
-import IGListKit
 import UIKit
 
 /// The required class type and protocol for each Cell in Minerva.
 public typealias ListCollectionViewCell = UICollectionViewCell & ListCell
 
 /// The cell that will be bound to a ListCellModel
-// TODO: Remove this dependency on IGListKit's ListBindable
-public protocol ListCell: ListBindable {
+public protocol ListCell {
   func bind(cellModel: ListCellModel, sizing: Bool)
 }
 
@@ -62,11 +60,11 @@ extension ListTypedCell {
   /// Call this method from ListBindable's |bindViewModel| function call.
   /// - Parameter viewModel: The view model that is being bound to this cell.
   public func bind(_ viewModel: Any) {
-    guard let wrapper = viewModel as? ListCellModelWrapper else {
+    guard let cellModel = viewModel as? ListCellModel else {
       assertionFailure("Invalid view model type \(viewModel)")
       return
     }
-    bind(cellModel: wrapper.model, sizing: false)
+    bind(cellModel: cellModel, sizing: false)
   }
 }
 

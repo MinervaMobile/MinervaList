@@ -5,10 +5,9 @@
 //
 
 import Foundation
-import IGListKit
 import UIKit
 
-public final class LegacyListController: NSObject, ListController {
+public final class ModernListController: NSObject, ListController {
   private enum Action {
     case didEndDisplaying
     case invalidateLayout
@@ -29,26 +28,13 @@ public final class LegacyListController: NSObject, ListController {
   public weak var reorderDelegate: ListControllerReorderDelegate?
   public weak var sizeDelegate: ListControllerSizeDelegate?
 
-  public weak var scrollViewDelegate: UIScrollViewDelegate? {
-    get { adapter.scrollViewDelegate }
-    set { adapter.scrollViewDelegate = newValue }
-  }
+  public weak var scrollViewDelegate: UIScrollViewDelegate?
+  public weak var viewController: UIViewController?
+  public weak var collectionView: UICollectionView?
 
-  public weak var viewController: UIViewController? {
-    get { adapter.viewController }
-    set { adapter.viewController = newValue }
-  }
+  public private(set) var listSections: [ListSection]
 
-  public var collectionView: UICollectionView? {
-    get { adapter.collectionView }
-    set { adapter.collectionView = newValue }
-  }
-
-  public var listSections: [ListSection] { listSectionWrappers.map(\.section) }
-
-  private let adapter: ListAdapter
   private var noLongerDisplayingCells = false
-  private var listSectionWrappers: [ListSectionWrapper]
   private var sizeController: ListCellSizeController
   private var actionQueue = [Action]()
   private var updating = false
@@ -57,13 +43,9 @@ public final class LegacyListController: NSObject, ListController {
 
   override public init() {
     self.sizeController = ListCellSizeController()
-    self.listSectionWrappers = []
-    let updater = ListAdapterUpdater()
-    self.adapter = ListAdapter(updater: updater, viewController: nil)
+    self.listSections = []
     super.init()
     sizeController.delegate = self
-    adapter.dataSource = self
-    adapter.moveDelegate = self
   }
 
   // MARK: - Public
@@ -72,7 +54,7 @@ public final class LegacyListController: NSObject, ListController {
     dispatchPrecondition(condition: .onQueue(.main))
     reloadData(completion: completion, enqueueIfNeeded: true, listSections: nil)
   }
-  
+
   public func reloadData(listSections: [ListSection], completion: Completion?) {
     dispatchPrecondition(condition: .onQueue(.main))
     reloadData(completion: completion, enqueueIfNeeded: true, listSections: listSections)
@@ -113,7 +95,7 @@ public final class LegacyListController: NSObject, ListController {
   public var centerCellModel: ListCellModel? {
     dispatchPrecondition(condition: .onQueue(.main))
     guard
-      let indexPath = adapter.collectionView?.centerCellIndexPath,
+      let indexPath = collectionView?.centerCellIndexPath,
       let cellModel = cellModel(at: indexPath)
     else {
       return nil
@@ -202,7 +184,7 @@ public final class LegacyListController: NSObject, ListController {
   // MARK: - Private
 
   private func endDisplayingVisibleCells() {
-    guard let visibleCells = adapter.collectionView?.visibleCells else { return }
+    guard let visibleCells = collectionView?.visibleCells else { return }
     visibleCells.compactMap { $0 as? ListDisplayableCell }.forEach { $0.didEndDisplayingCell() }
   }
 
@@ -253,21 +235,15 @@ public final class LegacyListController: NSObject, ListController {
     }
     updating = true
     if let listSections = listSections {
-      listSectionWrappers = listSections.map(ListSectionWrapper.init)
+      self.listSections = listSections
     }
-    adapter.reloadData { [weak self] finished in
-      defer {
-        completion?(finished)
-      }
-      guard let strongSelf = self else {
-        return
-      }
-      if strongSelf.noLongerDisplayingCells {
-        strongSelf.endDisplayingVisibleCells()
-      }
-      strongSelf.updating = false
-      strongSelf.processActionQueue()
+    collectionView?.reloadData()
+    if noLongerDisplayingCells {
+      endDisplayingVisibleCells()
     }
+    updating = false
+    processActionQueue()
+    completion?(true)
   }
 
   private func update(
@@ -300,8 +276,8 @@ public final class LegacyListController: NSObject, ListController {
     }
     #endif
     updating = true
-    listSectionWrappers = listSections.map(ListSectionWrapper.init)
-    adapter.performUpdates(animated: animated) { [weak self] finished in
+    self.listSections = listSections
+    collectionView?.performBatchUpdates({}, completion: { [weak self] finished in
       defer {
         completion?(finished)
       }
@@ -313,7 +289,7 @@ public final class LegacyListController: NSObject, ListController {
       }
       strongSelf.updating = false
       strongSelf.processActionQueue()
-    }
+    })
   }
 
   private func didEndDisplaying(enqueueIfNeeded: Bool) {
@@ -338,7 +314,7 @@ public final class LegacyListController: NSObject, ListController {
       processActionQueue()
     }
     guard noLongerDisplayingCells else { return }
-    guard let visibleCells = adapter.collectionView?.visibleCells else { return }
+    guard let visibleCells = collectionView?.visibleCells else { return }
     visibleCells.compactMap { $0 as? ListDisplayableCell }.forEach { $0.willDisplayCell() }
     noLongerDisplayingCells = false
   }
@@ -362,6 +338,7 @@ public final class LegacyListController: NSObject, ListController {
     animated: Bool,
     enqueueIfNeeded: Bool
   ) {
+    guard let collectionView = self.collectionView else { return }
     guard !enqueueIfNeeded || (actionQueue.isEmpty && !updating) else {
       actionQueue.append(
         .scrollTo(cellModel: cellModel, scrollPosition: scrollPosition, animated: animated)
@@ -372,37 +349,28 @@ public final class LegacyListController: NSObject, ListController {
       processActionQueue()
     }
     guard
-      let sectionWrapper = listSectionWrappers.first(where: {
-        $0.section.cellModels.contains(where: { $0.identifier == cellModel.identifier })
+      let sectionIndex = listSections.firstIndex(where: {
+        $0.cellModels.contains(where: { $0.identifier == cellModel.identifier })
       })
     else {
       assertionFailure("Section should exist for \(cellModel)")
       return
     }
-    guard let sectionController = adapter.sectionController(for: sectionWrapper) else {
-      assertionFailure("Section Controller should exist for \(sectionWrapper) and \(cellModel)")
-      return
-    }
+    let section = listSections[sectionIndex]
     guard
-      let modelIndex = sectionWrapper.section.cellModels.firstIndex(where: {
+      let modelIndex = section.cellModels.firstIndex(where: {
         $0.identifier == cellModel.identifier
       })
     else {
       assertionFailure("index should exist for \(cellModel)")
       return
     }
-    let indexPath = IndexPath(item: modelIndex, section: sectionController.section)
-    guard collectionView?.isIndexPathAvailable(indexPath) ?? false else {
+    let indexPath = IndexPath(item: modelIndex, section: sectionIndex)
+    guard collectionView.isIndexPathAvailable(indexPath) else {
       assertionFailure("IndexPath should exist for \(cellModel)")
       return
     }
-    sectionController.collectionContext?
-      .scroll(
-        to: sectionController,
-        at: modelIndex,
-        scrollPosition: scrollPosition,
-        animated: animated
-      )
+    collectionView.scrollToItem(at: indexPath, at: scrollPosition, animated: animated)
   }
 
   private func scroll(
@@ -449,45 +417,9 @@ public final class LegacyListController: NSObject, ListController {
   }
 }
 
-// MARK: - ListAdapterDataSource
-
-extension LegacyListController: ListAdapterDataSource {
-  public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-    listSectionWrappers
-  }
-
-  public func listAdapter(
-    _ listAdapter: ListAdapter,
-    sectionControllerFor object: Any
-  ) -> ListSectionController {
-    let sectionController = ListModelSectionController(sizeController: sizeController)
-    sectionController.delegate = self
-    return sectionController
-  }
-
-  public func emptyView(for listAdapter: ListAdapter) -> UIView? { nil }
-}
-
-// MARK: - ListAdapterMoveDelegate
-
-extension LegacyListController: ListAdapterMoveDelegate {
-  public func listAdapter(
-    _ listAdapter: ListAdapter,
-    move object: Any,
-    from previousObjects: [Any],
-    to objects: [Any]
-  ) {
-    guard let sections = objects as? [ListSectionWrapper] else {
-      assertionFailure("Invalid object types \(objects)")
-      return
-    }
-    listSectionWrappers = sections
-  }
-}
-
 // MARK: - ListCellSizeControllerDelegate
 
-extension LegacyListController: ListCellSizeControllerDelegate {
+extension ModernListController: ListCellSizeControllerDelegate {
   internal func sizeController(
     _ sizeController: ListCellSizeController,
     sizeFor model: ListCellModel,
@@ -500,63 +432,6 @@ extension LegacyListController: ListCellSizeControllerDelegate {
         sizeFor: model,
         at: indexPath,
         constrainedTo: sizeConstraints
-      )
-  }
-}
-
-// MARK: - ListModelSectionControllerDelegate
-
-extension LegacyListController: ListModelSectionControllerDelegate {
-  internal func sectionController(
-    _ sectionController: ListModelSectionController,
-    didInvalidateSizeAt indexPath: IndexPath
-  ) {
-    guard let collectionView = adapter.collectionView else { return }
-    let contextClassType: AnyClass = type(of: collectionView.collectionViewLayout).invalidationContextClass
-    guard let contextClass = contextClassType as? UICollectionViewLayoutInvalidationContext.Type
-    else { return }
-    let context = contextClass.init()
-    context.invalidateItems(at: [indexPath])
-    collectionView.collectionViewLayout.invalidateLayout(with: context)
-    adapter.performUpdates(animated: false, completion: nil)
-  }
-
-  internal func sectionControllerCompletedMove(
-    _ sectionController: ListModelSectionController,
-    for cellModel: ListCellModel,
-    fromIndex: Int,
-    toIndex: Int
-  ) {
-    reorderDelegate?.listController(self, moved: cellModel, fromIndex: fromIndex, toIndex: toIndex)
-  }
-
-  internal func sectionController(
-    _ sectionController: ListModelSectionController,
-    initialLayoutAttributes attributes: ListViewLayoutAttributes,
-    for section: ListSection,
-    at indexPath: IndexPath
-  ) -> ListViewLayoutAttributes? {
-    animationDelegate?
-      .listController(
-        self,
-        initialLayoutAttributes: attributes,
-        for: section,
-        at: indexPath
-      )
-  }
-
-  internal func sectionController(
-    _ sectionController: ListModelSectionController,
-    finalLayoutAttributes attributes: ListViewLayoutAttributes,
-    for section: ListSection,
-    at indexPath: IndexPath
-  ) -> ListViewLayoutAttributes? {
-    animationDelegate?
-      .listController(
-        self,
-        finalLayoutAttributes: attributes,
-        for: section,
-        at: indexPath
       )
   }
 }

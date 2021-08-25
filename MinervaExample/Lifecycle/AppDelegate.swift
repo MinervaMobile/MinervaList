@@ -5,19 +5,18 @@
 //
 
 import Foundation
-import IQKeyboardManagerSwift
 import UIKit
 
 @UIApplicationMain
 public final class AppDelegate: UIResponder, UIApplicationDelegate {
+  public var window: UIWindow?
   public func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    IQKeyboardManager.shared.enable = true
-    let window = UIWindow(frame: UIScreen.main.bounds)
-    window.rootViewController = UIViewController()
-    window.makeKeyAndVisible()
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.makeKeyAndVisible()
+    window?.rootViewController = UINavigationController(rootViewController: ViewController())
 
     return true
   }

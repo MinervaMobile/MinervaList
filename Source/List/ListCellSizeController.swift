@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import IGListKit
 import UIKit
 
 internal protocol ListCellSizeControllerDelegate: AnyObject {
@@ -73,7 +72,7 @@ internal final class ListCellSizeController {
       let isLastCell = (section.cellModels.count == indexPath.item + 1)
       if
         case let .proportionallyWithLastCellFillingWidth(minimumWidth) = sizeConstraints
-        .distribution, isLastCell
+          .distribution, isLastCell
       {
         let remainingWidth = remainingRowWidthForCell(
           at: indexPath,
@@ -97,12 +96,12 @@ internal final class ListCellSizeController {
 
       guard
         let size = delegate?
-        .sizeController(
-          self,
-          sizeFor: cellModel,
-          at: indexPath,
-          constrainedTo: sizeConstraints
-        )
+          .sizeController(
+            self,
+            sizeFor: cellModel,
+            at: indexPath,
+            constrainedTo: sizeConstraints
+          )
       else {
         assertionFailure(
           "The section controller delegate should provide a size for relative cell sizes."

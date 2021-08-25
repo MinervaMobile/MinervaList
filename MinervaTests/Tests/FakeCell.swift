@@ -16,13 +16,13 @@ public struct FakeCellModel: ListTypedCellModel, ListSelectableCellModel,
   public var selectionAction: SelectionAction?
 
   public typealias HighlightableModelType = FakeCellModel
-  public var highlightEnabled: Bool = true
+  public var highlightEnabled = true
   public var highlightColor: UIColor?
 
   public var highlightedAction: HighlightAction?
   public var unhighlightedAction: HighlightAction?
 
-  public var reorderable: Bool = true
+  public var reorderable = true
 
   public var identifier: String
   public var size: ListCellSize

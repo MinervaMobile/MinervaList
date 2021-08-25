@@ -4,13 +4,6 @@ use_frameworks!
 inhibit_all_warnings!
 
 def minerva_pods
-  pod 'IGListDiffKit', :git => 'https://github.com/Instagram/IGListKit'
-  pod 'IGListKit', :git => 'https://github.com/Instagram/IGListKit'
-  pod 'IQKeyboardManagerSwift'
-  pod 'MBProgressHUD'
-  pod 'RxSwift'
-  pod 'RxRelay'
-  pod 'SwiftLint'
 end
 
 target 'Minerva' do
