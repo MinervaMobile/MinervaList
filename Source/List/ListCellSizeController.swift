@@ -31,6 +31,7 @@ internal final class ListCellSizeController {
 
   internal func supplementarySize(
     for cellModel: ListCellModel,
+    at indexPath: IndexPath?,
     sizeConstraints: ListSizeConstraints
   ) -> CGSize {
     let size = cellModel.size(constrainedTo: sizeConstraints.containerSize)
@@ -40,8 +41,29 @@ internal final class ListCellSizeController {
     case let .explicit(size):
       return size
     case .relative:
-      assertionFailure("Relative sizing is not supported for supplementary views")
-      return autolayoutSize(for: cellModel, constrainedTo: sizeConstraints)
+      guard
+        let indexPath = indexPath
+      else {
+        assertionFailure(
+          "An indexPath should always be provided for .relative"
+        )
+        return .zero
+      }
+      guard
+        let size = delegate?
+        .sizeController(
+          self,
+          sizeFor: cellModel,
+          at: indexPath,
+          constrainedTo: sizeConstraints
+        )
+      else {
+        assertionFailure(
+          "The section controller delegate should provide a size for relative cell sizes."
+        )
+        return autolayoutSize(for: cellModel, constrainedTo: sizeConstraints)
+      }
+      return size
     }
   }
 
