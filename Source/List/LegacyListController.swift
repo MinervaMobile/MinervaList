@@ -502,6 +502,21 @@ extension LegacyListController: ListCellSizeControllerDelegate {
         constrainedTo: sizeConstraints
       )
   }
+
+  internal func sizeController(
+    _ sizeController: ListCellSizeController,
+    sizeForSupplementaryView model: ListCellModel,
+    at indexPath: IndexPath,
+    constrainedTo sizeConstraints: ListSizeConstraints
+  ) -> CGSize? {
+    sizeDelegate?
+      .listController(
+        self,
+        sizeForSupplementaryView: model,
+        at: indexPath,
+        constrainedTo: sizeConstraints
+      )
+  }
 }
 
 // MARK: - ListModelSectionControllerDelegate

@@ -161,4 +161,25 @@ public protocol ListControllerSizeDelegate: AnyObject {
     at indexPath: IndexPath,
     constrainedTo sizeConstraints: ListSizeConstraints
   ) -> CGSize?
+
+  /// Optional support for relative sized supplementary views
+  func listController(
+    _ listController: ListController,
+    sizeForSupplementaryView model: ListCellModel,
+    at indexPath: IndexPath,
+    constrainedTo sizeConstraints: ListSizeConstraints
+  ) -> CGSize?
+}
+
+extension ListControllerSizeDelegate {
+  /// Optional support for relative sized supplementary views
+  public func listController(
+    _ listController: ListController,
+    sizeForSupplementaryView model: ListCellModel,
+    at indexPath: IndexPath,
+    constrainedTo sizeConstraints: ListSizeConstraints
+  ) -> CGSize? {
+    assertionFailure("Default implementation should be overriden")
+    return .zero
+  }
 }

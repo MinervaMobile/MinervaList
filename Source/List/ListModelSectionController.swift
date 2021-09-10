@@ -389,7 +389,8 @@ extension ListModelSectionController: ListSupplementaryViewSource {
       return CGSize(width: collectionContext.containerSize.width, height: 44)
     }
 
-    return sizeController.supplementarySize(for: cellModel, sizeConstraints: sizeConstraints)
+    let indexPath = IndexPath(item: index, section: section)
+    return sizeController.supplementarySize(for: cellModel, at: indexPath, sizeConstraints: sizeConstraints)
   }
 }
 

@@ -25,6 +25,22 @@ public final class ListTests: CommonSetupTestCase {
     wait(for: [updateExpectation], timeout: 5)
   }
 
+  public func testHeaderDynamicSizing() {
+    let sizeManager = FakeSizeManager()
+    listController.sizeDelegate = sizeManager
+    let headerCellModel = FakeCellModel(identifier: "Fake", size: .relative)
+    var section = ListSection(cellModels: [], identifier: "Section")
+    section.headerModel = headerCellModel
+
+    let updateExpectation = expectation(description: "Update Expectation")
+    listController.update(with: [section], animated: false) { finished in
+      XCTAssertTrue(finished)
+      XCTAssertTrue(sizeManager.handledSizeRequest)
+      updateExpectation.fulfill()
+    }
+    wait(for: [updateExpectation], timeout: 5)
+  }
+
   public func testEqualDistribution() {
     let cellModels = FakeCellModel.createCellModels(count: 9)
     var section = ListSection(cellModels: cellModels, identifier: "Section")
