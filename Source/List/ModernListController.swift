@@ -7,6 +7,10 @@
 import Foundation
 import UIKit
 
+
+// apply() can be called on a background queue.  always call from the same queue
+// Set separatorLayoutGuide via separatorLayoutGuide.leadingAnchor = label.leadingAnchor
+//  to have it match the content
 public final class ModernListController: NSObject, ListController {
   private enum Action {
     case didEndDisplaying

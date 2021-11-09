@@ -17,12 +17,25 @@ public enum ListCellSize: Equatable {
   case relative
 }
 
+public struct ListCellModelWrapper: Hashable {
+
+  public let cellModel: ListCellModel
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(cellModel.identifier)
+  }
+
+  public static func == (lhs: ListCellModelWrapper, rhs: ListCellModelWrapper) -> Bool {
+    lhs.cellModel.identifier == rhs.cellModel.identifier
+  }
+}
+
 /// The model that will bind to a cell.
 public protocol ListCellModel {
   /// A unique identifier for the cell model. If the model identifiers are different,
   /// the cells are assumed to be completely different triggering a delete and
   /// an insert of a new cell.
-  var identifier: String { get }
+  var identifier: AnyHashable { get }
 
   /// The type of list cell that this model should be bound to.
   var cellType: ListCollectionViewCell.Type { get }
